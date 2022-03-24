@@ -102,8 +102,8 @@ services:
       # Uncomment / update the following line when using HTTPS with custom certificates
       # - '/LOCAL/KEY/PATH.key:/sourcegraph.key'
     ports:
-      - '0.0.0.0:80:80'
-      - '0.0.0.0:443:443'
+      - '80:80'
+      - '443:443'
     networks:
       - sourcegraph
     restart: always
@@ -445,7 +445,7 @@ services:
       - 'prometheus-v2:/prometheus'
       - '../prometheus:/sg_prometheus_add_ons'
     ports:
-      - '0.0.0.0:9090:9090'
+      - '9091:9090'
     networks:
       - sourcegraph
     restart: always
@@ -473,7 +473,7 @@ services:
       - '../grafana/datasources:/sg_config_grafana/provisioning/datasources'
       - '../grafana/dashboards:/sg_grafana_additional_dashboards'
     ports:
-      - '0.0.0.0:3370:3370'
+      - '3370:3370'
     networks:
       - sourcegraph
     restart: always
@@ -493,7 +493,7 @@ services:
       - '/:/rootfs:ro'
       - '/var/run:/var/run:ro'
       - '/sys:/sys:ro'
-      - '/var/lib/docker/:/var/lib/docker:ro'
+      - '/var/snap/docker/common/var-lib-docker:/var/lib/docker:ro'
       - '/dev/disk/:/dev/disk:ro'
       # Uncomment to enable container monitoring on MacOS
       # - '/var/run/docker.sock:/var/run/docker.sock:ro'
@@ -518,13 +518,13 @@ services:
     mem_limit: '512m'
     ports:
       # Query port
-      - '0.0.0.0:16686:16686'
+      - '16686:16686'
       # Collector port
-      - '0.0.0.0:14250:14250'
+      - '14250:14250'
       # Agent ports
-      - '0.0.0.0:5778:5778'
-      - '0.0.0.0:6831:6831'
-      - '0.0.0.0:6832:6832'
+      - '5778:5778'
+      - '6831:6831'
+      - '6832:6832'
     networks:
       - sourcegraph
     restart: always
