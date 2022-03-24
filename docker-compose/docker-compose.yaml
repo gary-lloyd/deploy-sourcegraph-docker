@@ -136,10 +136,10 @@ services:
       - 'INDEXED_SEARCH_SERVERS=zoekt-webserver-0:6070'
       - 'SRC_FRONTEND_INTERNAL=sourcegraph-frontend-internal:3090'
       - 'REPO_UPDATER_URL=http://repo-updater:3182'
-      - 'GRAFANA_SERVER_URL=http://grafana:3370'
+      - 'GRAFANA_SERVER_URL=http://grafana-sg:3370'
       - 'JAEGER_SERVER_URL=http://jaeger:16686'
       - 'GITHUB_BASE_URL=http://github-proxy:3180'
-      - 'PROMETHEUS_URL=http://prometheus:9090'
+      - 'PROMETHEUS_URL=http://prometheus-sg:9090'
     healthcheck:
       test: "wget -q 'http://127.0.0.1:3080/healthz' -O /dev/null || exit 1"
       interval: 10s
@@ -178,10 +178,10 @@ services:
       - 'INDEXED_SEARCH_SERVERS=zoekt-webserver-0:6070'
       - 'SRC_FRONTEND_INTERNAL=sourcegraph-frontend-internal:3090'
       - 'REPO_UPDATER_URL=http://repo-updater:3182'
-      - 'GRAFANA_SERVER_URL=http://grafana:3000'
+      - 'GRAFANA_SERVER_URL=http://grafana-sg:3000'
       - 'JAEGER_SERVER_URL=http://jaeger:16686'
       - 'GITHUB_BASE_URL=http://github-proxy:3180'
-      - 'PROMETHEUS_URL=http://prometheus:9090'
+      - 'PROMETHEUS_URL=http://prometheus-sg:9090'
     volumes:
       - 'sourcegraph-frontend-internal-0:/mnt/cache'
     networks:
@@ -436,8 +436,8 @@ services:
   # Ports exposed to other Sourcegraph services: none
   # Ports exposed to the public internet: none (HTTP 9090 should be exposed to admins only)
   #
-  prometheus:
-    container_name: prometheus
+  prometheus-sg:
+    container_name: prometheus-sg
     image: 'index.docker.io/sourcegraph/prometheus:3.38.0@sha256:4fcd8a2469b5d57e3b75e5adbb9b068d2013c6392307790cf69681a6dd7663d5'
     cpus: 4
     mem_limit: '8g'
@@ -463,8 +463,8 @@ services:
   # 'GF_AUTH_PROXY_ENABLED=true'
   # 'GF_AUTH_PROXY_HEADER_NAME='X-Forwarded-User'
   # 'GF_SERVER_ROOT_URL='https://grafana.example.com'
-  grafana:
-    container_name: grafana
+  grafana-sg:
+    container_name: grafana-sg
     image: 'index.docker.io/sourcegraph/grafana:3.38.0@sha256:7b1fa3a4848eea68627a1c69695024a6e35e32749f02d326715933878f78ce67'
     cpus: 1
     mem_limit: '1g'
